@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Commitment Card</title>
+    <style>
+        .card-container {
+            width: 100%;
+            max-width: 24rem;
+            /* ≈ 384px (tailwind max-w-sm) */
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 280px;
+            min-height: 520px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 1.5rem;
+            /* rounded-3xl */
+            padding: 1rem;
+            /* p-4 */
+            position: relative;
+            overflow: hidden;
+            min-height: 520px;
+        }
+
+        /* Responsive min-height for xl */
+        @media (min-width: 1280px) {
+            .card {
+                min-height: 400px;
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid #9ca3af;
+            /* border-gray-500 */
+            border-radius: 1.5rem;
+            pointer-events: none;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 1.5rem;
+            /* pb-6 */
+        }
+
+        .header img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .profile-section {
+            position: relative;
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+            display: flex;
+            justify-content: center;
+        }
+
+        .diamond {
+            position: absolute;
+            right: -1.25rem;
+            /* -right-5 */
+            max-width: 60px;
+            height: auto;
+        }
+
+        .profile-frame {
+            position: relative;
+            width: 14rem;
+            /* w-56 = 14 * 4px = 56 */
+            height: 14rem;
+        }
+
+        .profile-border {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 8px solid #80CCEB;
+            overflow: hidden;
+        }
+
+        .profile-border img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner {
+            position: absolute;
+            bottom: 1.5rem;
+            /* bottom-6 */
+            left: 50%;
+            transform: translateX(-50%) translateY(50%);
+            width: 14rem;
+            /* w-56 */
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+        }
+
+        .quote-mark {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-mark img {
+            max-width: 40px;
+            height: auto;
+        }
+
+        .name-quote {
+            text-align: center;
+            margin-bottom: 0.75rem;
+            /* mb-3 */
+        }
+
+        .name-quote p {
+            margin: 0 0 0.25rem 0;
+            font-size: 0.875rem;
+            /* text-md */
+            font-weight: 500;
+            /* font-medium */
+            color: #0098D5;
+        }
+
+        .name-quote .bold {
+            font-weight: 700;
+            /* font-bold */
+        }
+
+        .quote-text {
+            min-height: 70px;
+            line-height: 1.25;
+            /* leading-tight */
+        }
+
+        .commit-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            /* text-sm */
+            color: #8F8F8F;
+            height: 20px;
+        }
+
+        .commit-date img {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.75rem;
+            /* mt-3 */
+        }
+
+        .header-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            /* p-6 = 24px */
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 1.5rem;
+            /* pb-6 */
+        }
+
+        .logo-section img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .text-content {
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+            text-align: center;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            /* text-2xl */
+            font-weight: 700;
+            /* font-bold */
+            color: #003048;
+            margin: 0;
+        }
+
+        /* Larger size on lg and above (≈1024px) */
+        @media (min-width: 1024px) {
+            .title {
+                font-size: 40px;
+            }
+        }
+
+        .title .highlight {
+            color: #009AD8;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            /* text-lg */
+            color: #000000;
+            margin: 0.25rem 0 0 0;
+            /* mt-1 */
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                margin-top: 1rem;
+                /* md:mt-4 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="header-container">
+    <div class="logo-section">
+        <img src="https://mhappstgnew.blob.core.windows.net/dss-we-storage/requiredAssets/Group%20794.svg" alt="Logo" />
+    </div>
+    <div class="text-content">
+        <h1 class="title">
+            THE WALL OF <span class="highlight">COMMITMENT</span>
+        </h1>
+        <p class="subtitle">
+            A collective pledge towards safety at Ardagh Metal Packaging
+        </p>
+    </div>
+</div>
+<div class="card-container">
+    <div th:each="c : ${commitments}" class="card">
+        <!-- Header with logos -->
+        <div class="header">
+            <img src="https://mhappstgnew.blob.core.windows.net/dss-we-storage/requiredAssets/Group%20794.svg" alt="Logo" />
+        </div>
+
+        <!-- Profile section -->
+        <div class="profile-section">
+            <img src="https://mhappstgnew.blob.core.windows.net/dss-we-storage/requiredAssets/cardDiamond.png" class="diamond" alt="Diamond decoration" />
+
+            <div class="profile-frame">
+                <div class="profile-border">
+                    <img th:src="${c.compressedProfileImageUrl}" alt="Your Name" />
+                </div>
+
+                <div class="banner">
+                    <img src="https://mhappstgnew.blob.core.windows.net/dss-we-storage/requiredAssets/temp.png" alt="Banner" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Quotation mark -->
+        <div class="quote-mark">
+            <img src="https://mhappstgnew.blob.core.windows.net/dss-we-storage/requiredAssets/quote.png" alt="Quote" />
+        </div>
+
+        <!-- Name and quote -->
+        <div class="name-quote">
+            <p>Hi, my name is <span class="bold" th:text="${c.name}">Your Name</span>,</p>
+            <p class="quote-text">and I am committed to <span class="bold" th:text="${c.message}">your quote here</span>.</p>
+        </div>
+
+        <!-- Commitment date -->
+        <div class="commit-date">
+            <img src="https://mhappstgnew.blob.core.windows.net/dss-we-storage/requiredAssets/committedShield.png" alt="Shield" />
+            <p>Committed on <span th:text="${c.formattedCreatedAt}">Date</span></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

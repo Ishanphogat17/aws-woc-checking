@@ -1,0 +1,20 @@
+# ====================================================================
+# Configuration Template for Core Service (Config Client)
+# ====================================================================
+
+spring.application.name=core
+
+# Spring Profile to load (corresponds to core-<profile>.properties in the config repo)
+spring.profiles.active=dev
+server.port=9511
+
+# URI of the running Spring Cloud Config Server
+spring.config.import=optional:configserver:http://localhost:9510
+
+# Credentials required to authenticate with the Config Server.
+# Must match spring.security.user settings inside the config server configurations.
+spring.cloud.config.username=<CONFIG_SERVER_USERNAME>
+spring.cloud.config.password=<CONFIG_SERVER_PASSWORD>
+
+# Debugging logs
+logging.level.org.springframework.security=DEBUG

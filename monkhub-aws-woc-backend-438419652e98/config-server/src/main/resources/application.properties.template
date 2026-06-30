@@ -1,0 +1,23 @@
+# ====================================================================
+# Configuration Template for Spring Cloud Config Server
+# ====================================================================
+
+spring.application.name=config-server
+server.port=9510
+
+# Active Spring profile (dev, prod, local)
+spring.profiles.active=dev
+
+# Git repository configuration where properties are stored (e.g., aws-woc-config)
+# For HTTPS Authentication:
+spring.cloud.config.server.git.uri=https://<GIT_USERNAME>@<GIT_HOST_URL>/<ORG_NAME>/aws-woc-config.git
+spring.cloud.config.server.git.username=<GIT_USERNAME>
+spring.cloud.config.server.git.password=<GIT_ACCESS_TOKEN_OR_APP_PASSWORD>
+
+# Credentials for securing the Config Server endpoints. 
+# Clients (like core backend service) will use these credentials to authenticate.
+spring.security.user.name=<CONFIG_SERVER_USERNAME>
+spring.security.user.password=<CONFIG_SERVER_PASSWORD>
+
+# Logging
+logging.level.org.springframework.security=DEBUG
